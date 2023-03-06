@@ -27,6 +27,20 @@ async function handleGenerateNewShortURL(request , response) {
     })
 }
 
+async function handleGetAnalytics(request , response) {
+    // Getting ShortID from the parameters 
+    const shortID = request.params.shortID;
+
+    // Finding the Analytics in the MongoDB Database
+    const result = await URL.findOne({shortID});
+    
+    return response.json({
+        totalClicks: result.visitHistory.length,
+        analytics: result.visitHistory
+    })
+}
+
 module.exports = {
-    handleGenerateNewShortURL
+    handleGenerateNewShortURL,
+    handleGetAnalytics
 }
