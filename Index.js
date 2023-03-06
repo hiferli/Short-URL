@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
 
+// Getting Models
+const URL = require('./Models/URL')
+
 // DOTENV File
 require('dotenv').config({path: __dirname + '/.env'});
 
@@ -14,7 +17,29 @@ app.use(express.json())
 // Importing the Route(s)
 const URLRoute = require("./Routes/URL")
 
+// Route for Converting to Short URL
 app.use('/URL' , URLRoute)
+
+// Extracting Original Website from ShortID 
+// And thereafter updating the clicks option
+app.get("/:shortID" , async (request , response) => {
+    const shortID = request.params.shortID;
+    
+    const entry = await URL.findOneAndUpdate({
+        // Thing needed to find
+        shortID
+    } , {
+        // Thing needed to Update
+        $push: {
+            visitHistory: {
+                timestamp: Date.now(),
+            }
+        }
+    })
+
+    // Whenever the user hits the ShortID, he is redirected to the page
+    response.redirect(entry.redirectURL)
+})
 
 app.listen(port , () => {
     console.log(`App running on PORT ${port}`)
