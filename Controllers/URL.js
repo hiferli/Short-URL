@@ -1,9 +1,9 @@
-const { nanoid } = require("nanoid")
+const shortid = require("shortid")
 const URL = require('../Models/URL')
 
 async function handleGenerateNewShortURL(request , response) {
     // Getting the short ID for the given URL (Comes after '<link>/__')
-    const shortID = nanoid(8);
+    const shortID = shortid();
     
     // Getting Information from the request:
     const body = request.body;
