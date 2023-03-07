@@ -22,9 +22,16 @@ async function handleGenerateNewShortURL(request , response) {
         visitHistory: []
     })
 
-    return response.json({
+    // Returning to the home page once the ShortID is generated
+    // Furthermore, rendering the ShortID on the Home page
+
+    return response.render('Home' , {
         shortID: shortID
     })
+
+    // return response.json({
+    //     shortID: shortID
+    // })
 }
 
 async function handleGetAnalytics(request , response) {
