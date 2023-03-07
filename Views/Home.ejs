@@ -29,12 +29,13 @@
 
     <div class="container">
         <% if (locals.URLs) { %>
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">S. No</th>
                         <th scope="col">Short ID</th>
                         <th scope="col">Redirect</th>
+                        <th scope="col">Link</th>
                         <th scope="col">Clicks</th>
                     </tr>
                 </thead>
@@ -42,9 +43,12 @@
                     
                     <% URLs.forEach((URL , index) => { %>
                         <tr>
-                            <td><%= index %></td>
+                            <td><%= index + 1 %></td>
                             <td><%= URL.shortID %></td>
                             <td><%= URL.redirectURL %></td>
+                            <td>
+                                <a href="http://localhost:8000/URL/<%= URL.shortID %>">Link</a>
+                            </td>
                             <td><%= URL.visitHistory.length %></td>
                         </tr>
                     <% }) %>
