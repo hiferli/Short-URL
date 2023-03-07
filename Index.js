@@ -12,6 +12,10 @@ require('dotenv').config({ path: __dirname + '/.env' });
 const { connectToMongoDB } = require('./DatabaseConnection')
 connectToMongoDB(`mongodb+srv://Admin_Ishaan:${process.env.MONGODB_PASSWORD}@cluster0.s5eiovj.mongodb.net/?retryWrites=true&w=majority`).then(console.log(`Connection with MongoDB Established`)).catch((e) => console.log("Connection Error: " + e));
 
+// Setting up EJS as View Engine
+app.set("view engine" , "ejs")
+
+// Allowing CORS Sharing
 app.use(express.json())
 
 // Importing the Route(s)
