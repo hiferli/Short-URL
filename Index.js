@@ -22,6 +22,8 @@ app.set("views" , path.resolve("./Views"));
 
 // Allowing CORS Sharing
 app.use(express.json())
+// Allowing Data from Forms
+app.use(express.urlencoded({extended : false}))
 
 // Importing the Route(s)
 const URLRoute = require("./Routes/URL")
