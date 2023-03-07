@@ -29,7 +29,10 @@ const URLRoute = require("./Routes/URL")
 app.use('/URL', URLRoute)
 
 app.get("/test", async (request, response) => {
-    return response.render('Home');
+    const allURLs = await URL.find({});
+    return response.render('Home' , {
+        URLs: allURLs
+    });
 })
 
 // Extracting Original Website from ShortID 
