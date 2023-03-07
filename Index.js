@@ -6,6 +6,7 @@ const path = require('path');
 // Getting Models
 const URL = require('./Models/URL')
 
+
 // DOTENV File
 require('dotenv').config({ path: __dirname + '/.env' });
 
@@ -24,16 +25,13 @@ app.use(express.json())
 
 // Importing the Route(s)
 const URLRoute = require("./Routes/URL")
+const staticRoute = require("./Routes/StaticRouter") 
 
 // Route for Converting to Short URL
 app.use('/URL', URLRoute)
 
-app.get("/test", async (request, response) => {
-    const allURLs = await URL.find({});
-    return response.render('Home' , {
-        URLs: allURLs
-    });
-})
+// Frontend Routes Rendering
+app.use("/" , staticRoute);
 
 // Extracting Original Website from ShortID 
 // And thereafter updating the clicks option
