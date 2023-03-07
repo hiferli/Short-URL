@@ -20,6 +20,9 @@ const URLRoute = require("./Routes/URL")
 // Route for Converting to Short URL
 app.use('/URL' , URLRoute)
 
+app.get("/test" , (request , response) => {
+    response.end("<h1>Welcome to the testing sight of the app</h1>")
+})
 // Extracting Original Website from ShortID 
 // And thereafter updating the clicks option
 app.get("/:shortID" , async (request , response) => {
